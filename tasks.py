@@ -11,7 +11,7 @@ from robocorp import workitems
 import json
 import re
 from selenium.common.exceptions import StaleElementReferenceException
-
+import os
 
 
 class Scrappy:
@@ -39,15 +39,19 @@ class Scrappy:
     def initiating(self):
         ### call work item
         
-        with open('C:\\Users\\Gabriel\\source\\repos\\RobotGabrielFerreira\\output\\work-items-in\\workitems.json', 'r') as f:
-            work_items = json.load(f) 
+        script_directory = os.path.dirname(__file__)
 
+        file_path = os.path.join(script_directory, 'output/work-items-in/workitems.json')
+
+        with open(file_path, 'r') as f:
+            work_items = json.load(f)
         
         for work_item in work_items:
             payload = work_item["payload"]
             search_phrase = payload["search_phrase"]
+            category = payload["category"]
             months = payload["months"]
-            
+
         ### call the url ###
         self.driver.maximize_window()
         self.driver.get('https://www.latimes.com/')
@@ -60,9 +64,17 @@ class Scrappy:
             self.driver.quit()
 
         ### Interactions with the news in home page
-        btn_field = '//button[@class="flex justify-center items-center h-10 py-0 px-2.5 bg-transparent border-0 text-header-text-color cursor-pointer transition-colors hover:opacity-80 xs-5:px-5 md:w-10 md:p-0 md:ml-2.5 md:border md:border-solid md:border-header-border-color md:rounded-sm lg:ml-3.75"]'
+        btn_field = '//button[@data-element="search-button"]'
         search_field = '//input[@class="w-full text-2xl leading-none border-0 text-secondary-color-7 md:text-4xl-1"]'
-        btn2_field = 'button[@class="flex justify-center items-center transition-colors transition-bg cursor-pointer w-10 p-0 shrink-0 bg-transparent border-0"]'
+        btn_category = f'//li[@data-element="quick-links-item"]//a[@href="https://www.latimes.com/{category}"]'
+
+        element_indentificated = self.element_visible(btn_category)
+        if element_indentificated:
+            element_indentificated.click()
+            time.sleep(2)
+        else: 
+            print("button category not found")
+            self.driver.quit() 
 
         element_indentificated = self.element_visible(btn_field)
         if element_indentificated:
