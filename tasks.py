@@ -129,7 +129,6 @@ class Scrappy:
         list_image_news = []
         list_date_news = []
         
-        ### using regex
         regex_money = r'\b(?:R\$\s*\d+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?\s*(?:reais|dólares?))\b'
 
         title_news = self.list_elements_visible('//div[@class="promo-title-container"]')
