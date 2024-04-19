@@ -38,7 +38,7 @@ class Scrappy:
           
     def initiating(self):
         ### call work item
-        ## Dinamic path
+        
         script_directory = os.path.dirname(__file__)
         
         file_path = os.path.join(script_directory, 'output/work-items-in/workitems.json')
@@ -128,7 +128,8 @@ class Scrappy:
         list_description_news = []
         list_image_news = []
         list_date_news = []
-
+        
+        ### using regex
         regex_money = r'\b(?:R\$\s*\d+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?\s*(?:reais|dólares?))\b'
 
         title_news = self.list_elements_visible('//div[@class="promo-title-container"]')
