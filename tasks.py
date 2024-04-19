@@ -38,9 +38,9 @@ class Scrappy:
           
     def initiating(self):
         ### call work item
-        
+        ## Dinamic path
         script_directory = os.path.dirname(__file__)
-
+        
         file_path = os.path.join(script_directory, 'output/work-items-in/workitems.json')
 
         with open(file_path, 'r') as f:
