@@ -16,6 +16,7 @@ import os
 
 
 class Scrappy:
+    
     def __init__(self):
         self.driver = webdriver.Chrome()
         self.wait = WebDriverWait(self.driver, 50)
@@ -188,7 +189,6 @@ class Scrappy:
             index += 1
         workbook.save('Robot_news_excel.xlsx')
         print('Workbook has been created')
-
-        
+        sys.exit()
 start = Scrappy()
 start.initiating()

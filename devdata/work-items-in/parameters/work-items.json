@@ -1,7 +1,10 @@
 [
   {
-    "search_phrase": "United States",
-    "months": 2
-
+      "payload": {
+          "search_phrase": "United States",
+          "category": "sports",
+          "months": 2
+      },
+      "files": {}
   }
 ]
